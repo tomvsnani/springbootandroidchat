@@ -1,0 +1,23 @@
+version: "2.15"
+
+services:
+  userMysql:
+    image: mysql
+    ports:
+      - 8080:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "usersDB"
+    networks:
+      mynetwork:
+  chatMysql:
+    image: mysql
+    ports:
+      - 8081:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "chatsDB"
+    networks:
+      mynetwork:
+networks:
+  mynetwork:
