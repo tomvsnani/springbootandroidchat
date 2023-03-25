@@ -1,7 +1,7 @@
 package com.example.androidusermodule.controller;
 
 
-import com.example.androidchatmodule.ChatModel;
+import com.example.androidusermodule.Models.ChatModel;
 import com.example.androidusermodule.Models.UserModel;
 import com.example.androidusermodule.OpenFeign;
 import com.example.androidusermodule.UserRepository;

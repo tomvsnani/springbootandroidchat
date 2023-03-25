@@ -16,12 +16,7 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>AndroidChatModule</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>runtime</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>

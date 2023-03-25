@@ -8,7 +8,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://localhost:8080/usersDB
+    url: jdbc:mysql://userMysql/usersDB
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,4 +17,6 @@ logging:
   level:
     root: debug
     org.hibernate.SQL: DEBUG
+
+FEIGN_URL: "http://localhost:8002"
 

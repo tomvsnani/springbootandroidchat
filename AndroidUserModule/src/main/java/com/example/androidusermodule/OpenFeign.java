@@ -1,6 +1,6 @@
 package com.example.androidusermodule;
 
-import com.example.androidchatmodule.ChatModel;
+import com.example.androidusermodule.Models.ChatModel;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(url = "http://localhost:8001",name ="chat" )
+@FeignClient(url = "${FEIGN_URL}",name ="chat" )
 public interface OpenFeign {
 
     @GetMapping("/chats/getChats/{user1}/{user2}")

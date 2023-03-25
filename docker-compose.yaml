@@ -1,7 +1,8 @@
-version: "2.15"
+version: "3.8"
 
 services:
   userMysql:
+    container_name: userMysql
     image: mysql
     ports:
       - 8080:3306
@@ -10,7 +11,16 @@ services:
       MYSQL_DATABASE: "usersDB"
     networks:
       mynetwork:
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-u", "root", "-proot" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+
+
   chatMysql:
+    container_name: chatMysql
     image: mysql
     ports:
       - 8081:3306
@@ -19,5 +29,46 @@ services:
       MYSQL_DATABASE: "chatsDB"
     networks:
       mynetwork:
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-u", "root", "-proot" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  AndroidUser:
+    container_name: androidUser
+    image: ramurao123/userimage:1.0
+    ports:
+      - 8000:8000
+    depends_on:
+      userMysql:
+        condition: service_healthy
+      AndroidChat:
+        condition: service_started
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://userMysql:3306/usersDB"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+      FEIGN_URL: http://AndroidChat:8001
+    networks:
+      mynetwork:
+
+
+
+  AndroidChat:
+    container_name: AndroidChat
+    image: ramurao123/chatmage:1.0.0
+    ports:
+      - 8001:8001
+    networks:
+      mynetwork:
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://chatMysql:3306/chatsDB
+    depends_on:
+      chatMysql:
+        condition: service_healthy
+
+
+
 networks:
   mynetwork:
