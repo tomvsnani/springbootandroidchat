@@ -1,40 +1,134 @@
 package com.example.androidusermodule.Models;
 
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-
-import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
+
+
+enum MessageStatus {
+    NotSENT(2),
+    SENT(0),
+    RECEIVED(1);
+
+    final int value;
+
+    MessageStatus(int i) {
+        this.value = i;
+    }
+}
+
+
+enum MessageType {
+
+    AUDIO(0),
+
+    IMAGE(1),
+
+    TEXT(2);
+
+
+    final int value;
+
+    MessageType(int i) {
+        this.value = i;
+    }
+}
 
 
 public class ChatModel {
 
 
-    Long messageId;
+    Long id;
 
+    @Override
+    public String toString() {
+        return "ChatModel{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", timeStamp=" + timeStamp +
+                ", fromUserModel=" + fromUserModel +
+                ", toUserModel=" + toUserModel +
+                ", isForwarded=" + isForwarded +
+                ", messageStatus=" + messageStatus +
+                ", messagetype=" + messagetype +
+                ", valueArray=" + Arrays.toString(valueArray) +
+                '}';
+    }
+
+
+
+    @NotEmpty
     String message;
 
-    LocalDateTime timeStamp = LocalDateTime.now();
+    Long timeStamp = new Date().getTime();
 
-    Long fromUser;
+    @NotNull
+    Long fromUserModel;
 
-    public ChatModel(){}
+    @NotNull
+    Long toUserModel;
 
-    public ChatModel(String message, LocalDateTime timeStamp, Long fromUser, Long toUser) {
+    Boolean isForwarded = false;
+
+    public Boolean getForwarded() {
+        return isForwarded;
+    }
+
+    public void setForwarded(Boolean forwarded) {
+        isForwarded = forwarded;
+    }
+
+    public int getMessageStatus() {
+        return messageStatus;
+    }
+
+    public void setMessageStatus(int messageStatus) {
+        this.messageStatus = messageStatus;
+    }
+
+    public int getMessagetype() {
+        return messagetype;
+    }
+
+    public void setMessagetype(int messagetype) {
+        this.messagetype = messagetype;
+    }
+
+    public Byte[] getValueArray() {
+        return valueArray;
+    }
+
+    public void setValueArray(Byte[] valueArray) {
+        this.valueArray = valueArray;
+    }
+
+    int messageStatus;
+
+    int messagetype;
+
+    Byte[] valueArray;
+
+
+    public ChatModel() {
+    }
+
+    public ChatModel(String message, Long timeStamp, Long fromUser, Long toUser) {
         this.message = message;
         this.timeStamp = timeStamp;
-        this.fromUser = fromUser;
-        this.toUser = toUser;
+        this.fromUserModel = fromUser;
+        this.toUserModel = toUser;
+
     }
 
-    public Long getMessageId() {
-        return messageId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getMessage() {
@@ -45,30 +139,29 @@ public class ChatModel {
         this.message = message;
     }
 
-    public LocalDateTime getTimeStamp() {
+    public Long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(LocalDateTime timeStamp) {
+    public void setTimeStamp(Long timeStamp) {
         this.timeStamp = timeStamp;
     }
 
-    public Long getFromUser() {
-        return fromUser;
+    public Long getFromUserModel() {
+        return fromUserModel;
     }
 
-    public void setFromUser(Long fromUser) {
-        this.fromUser = fromUser;
+    public void setFromUserModel(Long fromUserModel) {
+        this.fromUserModel = fromUserModel;
     }
 
-    public Long getToUser() {
-        return toUser;
+    public Long getToUserModel() {
+        return toUserModel;
     }
 
-    public void setToUser(Long toUser) {
-        this.toUser = toUser;
+    public void setToUserModel(Long toUserModel) {
+        this.toUserModel = toUserModel;
     }
 
-    Long toUser;
 
 }

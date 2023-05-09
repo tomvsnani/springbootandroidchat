@@ -35,38 +35,40 @@ services:
       timeout: 5s
       retries: 3
 
-  AndroidUser:
-    container_name: androidUser
-    image: ramurao123/userimage:1.0
-    ports:
-      - 8000:8000
-    depends_on:
-      userMysql:
-        condition: service_healthy
-      AndroidChat:
-        condition: service_started
-    environment:
-      SPRING_DATASOURCE_URL: "jdbc:mysql://userMysql:3306/usersDB"
-      SPRING_DATASOURCE_USERNAME: "root"
-      SPRING_DATASOURCE_PASSWORD: "root"
-      FEIGN_URL: http://AndroidChat:8001
-    networks:
-      mynetwork:
-
-
-
-  AndroidChat:
-    container_name: AndroidChat
-    image: ramurao123/chatmage:1.0.0
-    ports:
-      - 8001:8001
-    networks:
-      mynetwork:
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://chatMysql:3306/chatsDB
-    depends_on:
-      chatMysql:
-        condition: service_healthy
+#  AndroidUser:
+#    container_name: androidUser
+#    image: ramurao123/userimage:1.0
+#    ports:
+#      - 8000:8000
+#    depends_on:
+#      userMysql:
+#        condition: service_healthy
+#      AndroidChat:
+#        condition: service_started
+#    environment:
+#      SPRING_DATASOURCE_URL: "jdbc:mysql://userMysql:3306/usersDB"
+#      SPRING_DATASOURCE_USERNAME: "root"
+#      SPRING_DATASOURCE_PASSWORD: "root"
+#      FEIGN_URL: http://AndroidChat:8001
+#    networks:
+#      mynetwork:
+#
+#
+#
+#  AndroidChat:
+#    container_name: AndroidChat
+#    image: ramurao123/chatmage:1.0.0
+#    ports:
+#      - 8001:8001
+#    networks:
+#      mynetwork:
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://chatMysql:3306/chatsDB
+#      SPRING_DATASOURCE_USERNAME: "root"
+#      SPRING_DATASOURCE_PASSWORD: "root"
+#    depends_on:
+#      chatMysql:
+#        condition: service_healthy
 
 
 

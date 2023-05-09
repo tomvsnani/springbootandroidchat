@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: chat
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
 
   datasource:
     username: root
@@ -17,4 +20,7 @@ logging:
   level:
     root: debug
     org.hibernate.SQL: DEBUG
+
+
+
 

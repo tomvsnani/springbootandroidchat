@@ -17,4 +17,13 @@ public interface OpenFeign {
 
     @PostMapping("/chats/createChat")
     ChatModel createChat(@RequestBody ChatModel chatModel);
+
+    @GetMapping("/chats/chatsonuserid/{id}")
+
+    List<ChatModel> getChatsonUserId(@PathVariable Long id);
+
+
+    @GetMapping("/chats/chatbyid/{id}")
+
+    ChatModel getChatsByMessageId(@PathVariable Long id);
 }

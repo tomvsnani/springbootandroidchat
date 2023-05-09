@@ -1,7 +1,6 @@
 package com.example.androidusermodule.Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Access;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,49 +12,42 @@ public class UserModel {
 
     @Id
     @GeneratedValue()
-    private Long user_id;
+    private Long id;
 
-    private String user_name;
+    private String name;
 
-    @Email
-    private String email;
+    private String imageUrl;
 
-    @Size(min = 5)
-    @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
-    private String password;
-
-    public UserModel(){
-
+    public Long getId() {
+        return id;
     }
 
-    public UserModel(String user_name, String email, String password) {
-        this.user_name = user_name;
-        this.email = email;
-        this.password = password;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public String getName() {
+        return name;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public String getEmail() {
-        return email;
+    public Boolean getOnline() {
+        return isOnline;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setOnline(Boolean online) {
+        isOnline = online;
     }
 
     public String getPassword() {
@@ -65,4 +57,18 @@ public class UserModel {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @JsonProperty("isOnline")
+    private Boolean isOnline;
+
+
+    @Size(min = 5)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
+    public UserModel() {
+
+    }
+
+
 }
